@@ -43,7 +43,7 @@ class Dictionary:
 
             index = (index + 1) % self.__capacity
 
-        raise KeyError
+        raise KeyError("Element not found by key")
 
     def __len__(self) -> int:
         return self.__len
@@ -105,7 +105,7 @@ class Dictionary:
 
             index = (index + 1) % self.__capacity
 
-        raise KeyError
+        raise KeyError("Element not found by key")
 
     def get(self, key: Any, default_value: Any = None) -> Any:
         index = self.get_index(hash(key))
@@ -123,9 +123,12 @@ class Dictionary:
     def pop(self, key: Any, default_value: Any = None) -> Any:
         value = self.get(key, default_value)
         if value is None:
-            raise KeyError
+            raise KeyError("Element not found by key")
         self.__delitem__(key)
         return value
 
     def __iter__(self) -> Any:
-        return iter(self.__hash_table)
+        list_keys = [node_value[0]
+                     for node_value in self.__hash_table
+                     if node_value is not None]
+        return iter(list_keys)
