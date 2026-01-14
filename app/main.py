@@ -1,6 +1,4 @@
 from typing import Any
-from typing import Optional
-from app.point import Point
 
 
 class Dictionary:
@@ -39,7 +37,7 @@ class Dictionary:
     def __getitem__(self, key: Any) -> Any:
         index = self.get_index(hash(key))
         for _ in range(0, self.__capacity):
-            if self.__hash_table[index] is not  None:
+            if self.__hash_table[index] is not None:
                 if key == self.__hash_table[index][0]:
                     return self.__hash_table[index][2]
 
@@ -96,7 +94,7 @@ class Dictionary:
         self.__len = 0
         self.__threshold: int = self.get_threshold()
 
-    def  __delitem__(self, key: Any) -> None:
+    def __delitem__(self, key: Any) -> None:
         index = self.get_index(hash(key))
         for _ in range(0, self.__capacity):
             if self.__hash_table[index] is not None:
@@ -131,41 +129,3 @@ class Dictionary:
 
     def __iter__(self) -> Any:
         return iter(self.__hash_table)
-
-
-
-d = Dictionary()
-d[Point(0, 0)] = "origin"
-d[Point(10, 10)] =  "A"
-d[Point(-10, 10)] =  "B"
-d[Point(0, 5)] =  "C"
-
-
-# d = Dictionary()
-# d["a"] = 100
-# d["b"] = 700
-# d["c"] = 800
-# d["f"] = 300
-# d["g"] = 200
-# d["n"] = 300
-#
-
-print(d)
-print(d._Dictionary__hash_table)
-#print(d["g"])
-print(len(d))
-
-print(d.get(Point(0, 0), "default"))
-print(d.get(Point(30, 10), "default"))
-
-it = iter(d)
-print(next(it))  # следующий ключ
-print(next(it))
-# print("+++++++++++++")
-#
-# del d[Point(0, 0)]
-# print(d)
-# print(d._Dictionary__hash_table)
-# #print(d["g"])
-# print(len(d))
-
